@@ -119,7 +119,8 @@ def handle_client(reader, writer):
     line = line.decode('utf-8').strip()
 
     if '@' not in line:
-        writer.write('Error: Username or site missing\n'.encode('utf-8'))
+        writer.write('finger: site missing\n'.encode('utf-8'))
+        writer.write('finger: expected \'user@site\'\n'.encode('utf-8'))
         writer.close()
         return
 
