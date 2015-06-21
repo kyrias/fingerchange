@@ -142,7 +142,7 @@ def handle_client(reader, writer):
 
 loop = asyncio.get_event_loop()
 
-coro = asyncio.start_server(handle_client, host='127.0.0.1', port=79, loop=loop)
+coro = asyncio.start_server(handle_client, host='0.0.0.0', port=79, loop=loop)
 server = loop.run_until_complete(coro)
 
 try:
