@@ -18,7 +18,7 @@ def get_user_by_uid(site, uid):
     return res['items'][0]
 
 
-def get_users(site, name=''):
+def get_users_by_name(site, name=''):
     params = {
         'site': site,
         'inname': name,
@@ -93,7 +93,7 @@ def handle_client(reader, writer):
         uid = int(user)
         users = [get_user_by_uid(site, uid)]
     except ValueError:
-        users = get_users(site, user)
+        users = get_users_by_name(site, user)
 
     for user in users:
         msg = format_user(user)
