@@ -127,6 +127,9 @@ def handle_client(reader, writer):
         users = get_users_by_name(site, user)
 
     for user in users:
+        if user['user_type'] == 'unregistered':
+            continue
+
         msg = format_user(user, long_output)
         writer.write(msg.encode('utf-8'))
 
