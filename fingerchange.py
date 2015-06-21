@@ -84,9 +84,11 @@ def format_user(user, long_output=True):
     msg += format_field('reputation', user['reputation'])
     if 'location' in user:
         msg += format_field('location', user['location'])
+
     msg += format_field('profile', format_url(user['link']))
-    if 'website_url' in user:
+    if 'website_url' in user and len(user['website_url']) > 0:
         msg += format_field('website', format_url(user['website_url']))
+
     msg += format_rep_changes(user)
     msg += '\n'
 
