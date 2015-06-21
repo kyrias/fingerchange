@@ -76,7 +76,7 @@ def format_rep_changes(user):
     return msg
 
 
-def format_user(user):
+def format_user(user, long_output=True):
     msg = '\n'
     msg += format_header(user['account_id'], '=')
     msg += format_field('uid', user['user_id'])
@@ -90,7 +90,7 @@ def format_user(user):
     msg += format_rep_changes(user)
     msg += '\n'
 
-    if 'about_me' in user:
+    if long_output and 'about_me' in user:
         msg += format_header('About User', '-') + '\n'
 
         soup = BeautifulSoup(user['about_me'])
@@ -114,6 +114,12 @@ def handle_client(reader, writer):
         return
 
     user, site = line.split('@')
+    if user.startswith('/W'):
+        long_output = True
+        user = user[3:]
+    else:
+        long_output = False
+
     try:
         uid = int(user)
         users = [get_user_by_uid(site, uid)]
@@ -121,7 +127,7 @@ def handle_client(reader, writer):
         users = get_users_by_name(site, user)
 
     for user in users:
-        msg = format_user(user)
+        msg = format_user(user, long_output)
         writer.write(msg.encode('utf-8'))
 
     writer.close()
