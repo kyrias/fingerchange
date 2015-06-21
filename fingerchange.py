@@ -7,6 +7,12 @@ import json
 api_url = 'http://api.stackexchange.com/2.2/users/'
 
 
+def slice_dict(dict, slice):
+    s_len = len(slice)
+    return {key[s_len:]: value for key,value in dict.items()
+                                             if key.startswith(slice)}
+
+
 def get_user_by_uid(site, uid):
     params = {
         'site': site,
@@ -54,6 +60,22 @@ def format_header(header, filler):
     return msg
 
 
+def format_rep_changes(user):
+    changes = slice_dict(user, 'reputation_')
+    msg = ''
+    if changes['change_day'] > 0:
+        msg += format_field('day', changes['change_day'], indent=3)
+    if changes['change_quarter'] > 0:
+        msg += format_field('quarter', changes['change_quarter'], indent=3)
+    if changes['change_year'] > 0:
+        msg += format_field('year', changes['change_year'], indent=3)
+
+    if len(msg) > 0:
+        msg = format_field('reputation changes') + msg
+
+    return msg
+
+
 def format_user(user):
     msg = '\n'
     msg += format_header(user['account_id'], '=')
@@ -64,9 +86,9 @@ def format_user(user):
         msg += format_field('location', user['location'])
     msg += format_field('profile', format_url(user['link']))
     if 'website_url' in user:
-        msg += format_field('website', format_url(user['website_url'])) + '\n'
-    else:
-        msg += '\n'
+        msg += format_field('website', format_url(user['website_url']))
+    msg += format_rep_changes(user)
+    msg += '\n'
 
     if 'about_me' in user:
         msg += format_header('About User', '-') + '\n'
