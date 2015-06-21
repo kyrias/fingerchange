@@ -23,7 +23,10 @@ def get_user_by_uid(site, uid):
     res = requests.get(api_url + str(uid), params=params)
     res = json.loads(res.text)
 
-    return res['items'][0]
+    if 'items' in res and len(res['items']) > 0:
+        return res['items'][0]
+    else:
+        return
 
 
 def get_users_by_name(site, name=''):
@@ -35,7 +38,10 @@ def get_users_by_name(site, name=''):
     res = requests.get(api_url, params=params)
     res = json.loads(res.text)
 
-    return res['items']
+    if 'items' in res:
+        return res['items']
+    else:
+        return []
 
 
 def format_url(url):
