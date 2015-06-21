@@ -94,7 +94,7 @@ def format_user(user, long_output=True):
     msg += format_rep_changes(user)
     msg += '\n'
 
-    if long_output and 'about_me' in user:
+    if long_output and 'about_me' in user and len(user['about_me']) > 0:
         msg += format_header('About User', '-') + '\n'
 
         soup = BeautifulSoup(user['about_me'])
