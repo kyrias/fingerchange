@@ -57,6 +57,8 @@ def format_user(user):
     msg += format_field('uid', user['user_id'])
     msg += format_field('name', user['display_name'])
     msg += format_field('reputation', user['reputation'])
+    if 'location' in user:
+        msg += format_field('location', user['location'])
     msg += format_field('profile', format_url(user['link']))
     if 'website_url' in user:
         msg += format_field('website', format_url(user['website_url'])) + '\n'
