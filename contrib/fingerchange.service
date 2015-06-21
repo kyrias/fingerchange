@@ -1,0 +1,9 @@
+[Unit]
+Description=StackExchange profile finger gateway
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/fingerchange.py
+
+[Install]
+WantedBy=multi-user.target
