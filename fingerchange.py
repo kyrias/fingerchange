@@ -34,8 +34,11 @@ def format_url(url):
     return '<{}>'.format(url)
 
 
-def format_field(key, value):
-    return ' :: {} {}\n'.format(key, value)
+def format_field(key, value=None, indent=1):
+    if not value:
+        return '{}:: {}\n'.format(' '*indent, key)
+
+    return '{}:: {} {}\n'.format(' '*indent, key, value)
 
 
 def format_header(header, filler):
