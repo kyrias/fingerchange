@@ -4,7 +4,7 @@ import requests
 import asyncio
 import json
 
-api_url = 'http://api.stackexchange.com/2.2/users/'
+api_url = 'https://api.stackexchange.com/2.2/users/'
 
 
 def slice_dict(dict, slice):
