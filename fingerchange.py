@@ -64,11 +64,11 @@ def format_rep_changes(user):
     changes = slice_dict(user, 'reputation_')
     msg = ''
     if changes['change_day'] > 0:
-        msg += format_field('day', changes['change_day'], indent=3)
+        msg += format_field('day', '+' + str(changes['change_day']), indent=3)
     if changes['change_quarter'] > 0:
-        msg += format_field('quarter', changes['change_quarter'], indent=3)
+        msg += format_field('quarter', '+' + str(changes['change_quarter']), indent=3)
     if changes['change_year'] > 0:
-        msg += format_field('year', changes['change_year'], indent=3)
+        msg += format_field('year', '+' + str(changes['change_year']), indent=3)
 
     if len(msg) > 0:
         msg = format_field('reputation changes') + msg
