@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from textwrap import fill, indent
 from bs4 import BeautifulSoup
 import requests
