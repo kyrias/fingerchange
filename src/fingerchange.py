@@ -137,6 +137,12 @@ def handle_client(reader, writer):
     except ValueError:
         users = get_users_by_name(site, user)
 
+    if len(users) == 0:
+        error = 'finger: no user found by id or name \'{}\'\n'.format(user)
+        writer.write(error.encode('utf-8'))
+        writer.close()
+        return
+
     for user in users:
         if user['user_type'] == 'unregistered':
             continue
